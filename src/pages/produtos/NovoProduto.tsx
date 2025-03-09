@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import '../../styles/novoProduto.css'
 import { useState } from "react";
@@ -10,20 +11,26 @@ const NovoProduto = () => {
   const [name, setName] = useState("");
   const [descricao, setDescricao] = useState("");
   const [imagem, setImagem] = useState(null);
-  const [imagemPreview, setImagemPreview] = useState("");
+  const [imagemPreview, setImagemPreview] = useState<string | null>(null);
 
   const [valor, setValor] = useState("");
   const [quantidade, setQuantidade] = useState(""); 
 
 
 
-  const handleImageChange = (event) => {
+  const handleImageChange = (event: any) => {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setImagemPreview(reader.result);
-        setImagem(file)
+        
+        if (reader.result && typeof reader.result === "string") {
+          setImagemPreview(reader.result);
+        } else {
+          
+          setImagemPreview(null);
+        }
+        setImagem(file);
       };
       reader.readAsDataURL(file);
     }
@@ -34,7 +41,9 @@ const NovoProduto = () => {
     try {
       const formData = new FormData()
       console.log(imagem)
-      formData.append("image", imagem)
+      if(imagem){
+        formData.append("image", imagem)
+      }
       const {data} = await axios.post("http://localhost:3000/api/produtos/uploads", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       })
@@ -108,7 +117,7 @@ const NovoProduto = () => {
           />
           {imagem && (
             <img
-              src={imagemPreview}
+              src={imagemPreview ?? ""}
               alt="Pré-visualização"
               className="imagem-preview"
               onError={(e) =>
