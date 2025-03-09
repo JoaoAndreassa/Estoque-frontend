@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import '../../styles/novoProduto.css'
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -8,17 +9,39 @@ const NovoProduto = () => {
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [descricao, setDescricao] = useState("");
-  const [imagem, setImagem] = useState("");
+  const [imagem, setImagem] = useState(null);
+  const [imagemPreview, setImagemPreview] = useState("");
+
   const [valor, setValor] = useState("");
-  const [quantidade, setQuantidade] = useState("");
+  const [quantidade, setQuantidade] = useState(""); 
+
+
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagemPreview(reader.result);
+        setImagem(file)
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      const formData = new FormData()
+      console.log(imagem)
+      formData.append("image", imagem)
+      const {data} = await axios.post("http://localhost:3000/api/produtos/uploads", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
       await axios.post("http://localhost:3000/api/produtos", {
         name,
         descricao,
-        imagem,
+        imagem: data.imageUrl,
         valor: parseFloat(valor),
         quantidade: parseInt(quantidade),
       });
@@ -79,14 +102,13 @@ const NovoProduto = () => {
 
         <div className="form-group">
           <input
-            type="text"
-            value={imagem}
-            onChange={(e) => setImagem(e.target.value)}
-            placeholder="URL da Imagem: https://exemplo.com/imagem.jpg"
+            type="file"
+            onChange={(e) => handleImageChange(e)}
+            // placeholder="URL da Imagem: https://exemplo.com/imagem.jpg"
           />
           {imagem && (
             <img
-              src={imagem}
+              src={imagemPreview}
               alt="Pré-visualização"
               className="imagem-preview"
               onError={(e) =>

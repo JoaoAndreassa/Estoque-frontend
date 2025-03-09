@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import "../styles/resumoEstoque.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -20,6 +21,7 @@ const Resumo = () => {
         let valorEntradas = 0; 
         const movimentacoesMap = { entrada: 0, saida: 0 };
 
+        
         
         estoqueRes.data.forEach((mov: any) => {
           if (mov.tipo === "entrada") {

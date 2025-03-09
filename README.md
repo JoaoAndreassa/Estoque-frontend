@@ -49,25 +49,25 @@ Exibição de Imagens de Produtos
 
 ##  Prints do Sistema
 Tela de registro de usuario:
-![alt text](<Captura de tela 2025-03-09 003526.png>)
+![alt text](<src/assets/cadastro.png>)
 
 Tela de login:
-![alt text](<Captura de tela 2025-03-09 003512.png>)
+![alt text](<src/assets/login.png>)
 
 Ao fazer login é redirecionado a pagina inicial do sistema:
-![alt text](<Captura de tela 2025-03-09 003539.png>)
+![alt text](<src/assets/produtoVazio.png>)
 
 Após isso vai cadastrar um produto:
-![alt text](<Captura de tela 2025-03-09 003717.png>)
+![alt text](<src/assets/adicionaProduto.png>)
 
 Após a inclusão do produto no sistema, voltara automaticamente para a pagina inicial:
-![alt text](<Captura de tela 2025-03-09 003728.png>)
+![alt text](<src/assets/listaProduto.png>)
 
 Tela de resumo de estoque:
-![alt text](<Captura de tela 2025-03-09 004640.png>)
+![alt text](<src/assets/resumo.png>)
 
 tela de controle, com entrada e saida com data e hora:
-![alt text](<Captura de tela 2025-03-09 004700.png>)
+![alt text](<src/assets/controleEstoque.png>)
 
 ### **Melhorias Futuras:**
 ```sh
