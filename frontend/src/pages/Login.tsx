@@ -1,4 +1,4 @@
-import '../styles/auth.css'
+import '../styles/login.css'
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -29,7 +29,7 @@ const Login = () => {
     try {
       const response = await axios.post("http://localhost:3000/api/users/login", data);
       localStorage.setItem("token", response.data.token);
-      navigate("/dashboard"); // Redireciona para o Dashboard após login
+      navigate("/dashboard/produtos"); // Redireciona para o Dashboard após login
     
     } catch (error) {
         console.error("Erro ao fazer login:", error);
@@ -39,24 +39,31 @@ const Login = () => {
   };
 
   return (
-    
-    <div style={{display:"flex", flexDirection:"column", justifyContent:"center", textAlign:"center"}}>
-      <h2>Login</h2>
-      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label>Email:</label>
-          <input type="email" {...register("email")} />
-          <p style={{ color: "red" }}>{errors.email?.message}</p>
+    <div className="login-container">
+      <h2 className="login-title">Login Inventory</h2>
+
+      
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
+
+      <form onSubmit={handleSubmit(onSubmit)} className="login-form">
+        <div className="form-group">
+          <label htmlFor="email">Email:</label>
+          <input id="email" type="email" {...register("email")} />
+          {errors.email && <p className="error-message">{errors.email.message}</p>}
         </div>
-        <div>
-          <label>Senha:</label>
-          <input type="password" {...register("password")} />
-          <p style={{ color: "red" }}>{errors.password?.message}</p>
+
+        <div className="form-group">
+          <label htmlFor="password">Senha:</label>
+          <input id="password" type="password" {...register("password")} />
+          {errors.password && <p className="error-message">{errors.password.message}</p>}
         </div>
-        <button type="submit">Entrar</button>
+
+        <button type="submit" className="login-button">
+          Entrar
+        </button>
       </form>
-      <p>
+
+      <p className="register-link">
         Não tem uma conta? <a href="/register">Cadastre-se</a>
       </p>
     </div>

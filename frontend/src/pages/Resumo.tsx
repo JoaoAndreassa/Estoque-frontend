@@ -1,29 +1,51 @@
+import "../styles/resumoEstoque.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Chart from "react-apexcharts";
 
 const Resumo = () => {
-  const [totalProdutos, setTotalProdutos] = useState(0);
-  const [quantidadeTotal, setQuantidadeTotal] = useState(0);
+  const [valorTotalEstoque, setValorTotalEstoque] = useState(0);
+  const [valorTotalVendido, setValorTotalVendido] = useState(0);
+  const [valorTotalEntradas, setValorTotalEntradas] = useState(0); 
   const [movimentacoes, setMovimentacoes] = useState<{ tipo: string; quantidade: number }[]>([]);
 
-
-  
   useEffect(() => {
     const fetchData = async () => {
       try {
         const produtosRes = await axios.get("http://localhost:3000/api/produtos");
-        setTotalProdutos(produtosRes.data.length);
-
         const estoqueRes = await axios.get("http://localhost:3000/api/estoque");
-        let totalEstoque = 0;
+
+        let valorEstoque = 0;
+        let valorVendido = 0;
+        let valorEntradas = 0; 
         const movimentacoesMap = { entrada: 0, saida: 0 };
 
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        
         estoqueRes.data.forEach((mov: any) => {
-          if (mov.tipo === "entrada") movimentacoesMap.entrada += mov.quantidade;
-          if (mov.tipo === "saida") movimentacoesMap.saida += mov.quantidade;
-          totalEstoque += mov.tipo === "entrada" ? mov.quantidade : -mov.quantidade;
+          if (mov.tipo === "entrada") {
+            movimentacoesMap.entrada += mov.quantidade;
+            
+           
+            const produto = produtosRes.data.find((p: any) => p.id === mov.produtoId);
+            if (produto) {
+              valorEntradas += produto.valor * mov.quantidade;
+            }
+          }
+
+          if (mov.tipo === "saida") {
+            movimentacoesMap.saida += mov.quantidade;
+
+            
+            const produto = produtosRes.data.find((p: any) => p.id === mov.produtoId);
+            if (produto) {
+              valorVendido += produto.valor * mov.quantidade;
+            }
+          }
+        });
+
+        
+        produtosRes.data.forEach((produto: any) => {
+          valorEstoque += produto.valor * produto.quantidade;
         });
 
         setMovimentacoes([
@@ -31,7 +53,9 @@ const Resumo = () => {
           { tipo: "Saídas", quantidade: movimentacoesMap.saida },
         ]);
 
-        setQuantidadeTotal(totalEstoque);
+        setValorTotalEstoque(valorEstoque);
+        setValorTotalVendido(valorVendido);
+        setValorTotalEntradas(valorEntradas);
       } catch (error) {
         console.error("Erro ao carregar dados do dashboard:", error);
       }
@@ -41,35 +65,35 @@ const Resumo = () => {
   }, []);
 
   return (
-    <div style={{ padding: "20px", textAlign: "center", background: "#fff", borderRadius: "8px", boxShadow: "0 2px 5px rgba(0,0,0,0.1)" }}>
-      <h2 style={{ color: "#007bff" }}>📊 Resumo do Estoque</h2>
+    <div className="resumo-estoque-container">
+      <h2 className="resumo-estoque-title">📊 Resumo do Estoque</h2>
 
-      <div style={{ display: "flex", justifyContent: "space-between", marginTop: "20px" }}>
-        <div style={{ background: "#f8f9fa", padding: "20px", borderRadius: "8px", flex: 1, margin: "10px" }}>
-          <h3>Total de Produtos</h3>
-          <p style={{ fontSize: "24px", fontWeight: "bold" }}>{totalProdutos}</p>
+      <div className="resumo-estoque-cards">
+        <div className="resumo-estoque-card">
+          <h3>Valor Total em Estoque</h3>
+          <p className="resumo-estoque-value">R$ {valorTotalEstoque.toFixed(2)}</p>
         </div>
-        <div style={{ background: "#f8f9fa", padding: "20px", borderRadius: "8px", flex: 1, margin: "10px" }}>
-          <h3>Quantidade em Estoque</h3>
-          <p style={{ fontSize: "24px", fontWeight: "bold" }}>{quantidadeTotal}</p>
+        <div className="resumo-estoque-card">
+          <h3>Valor Total Vendido</h3>
+          <p className="resumo-estoque-value">R$ {valorTotalVendido.toFixed(2)}</p>
+        </div>
+        <div className="resumo-estoque-card">
+          <h3>Valor Total Do Estoque</h3> 
+          <p className="resumo-estoque-value">R$ {valorTotalEntradas.toFixed(2)}</p>
         </div>
       </div>
 
-      <h3 style={{ marginTop: "20px" }}>📊 Movimentações de Estoque</h3>
+      <h3 className="resumo-estoque-subtitle">📊 Movimentações de Estoque</h3>
+
       <Chart
-        type="bar"
+        type="pie"
         width="100%"
         height="300"
-        series={[
-          {
-            name: "Quantidade",
-            data: movimentacoes.map((m) => m.quantidade),
-          },
-        ]}
+        series={movimentacoes.map((m) => m.quantidade)}
         options={{
-          chart: { id: "estoque-movimentacoes" },
-          xaxis: { categories: movimentacoes.map((m) => m.tipo) },
+          labels: movimentacoes.map((m) => m.tipo),
           colors: ["#28a745", "#dc3545"],
+          chart: { id: "estoque-movimentacoes" },
         }}
       />
     </div>

@@ -32,36 +32,71 @@ const NovoProduto = () => {
   };
 
   return (
-    <div>
-      <h2>➕ Adicionar Novo Produto</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Nome:</label>
-          <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
+    <div className="novo-produto-container">
+      <h2 className="novo-produto-title">➕ Adicionar Novo Produto</h2>
+
+      <form onSubmit={handleSubmit} className="novo-produto-form">
+        <div className="form-group">
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+            placeholder="Nome:"
+          />
         </div>
-        <div>
-          <label>Descrição:</label>
-          <textarea value={descricao} onChange={(e) => setDescricao(e.target.value)} required />
+
+        
+        <div className="form-group">
+          <textarea
+            value={descricao}
+            onChange={(e) => setDescricao(e.target.value)}
+            required
+            placeholder="Descrição:"
+          />
         </div>
-        <div>
-          <label>Valor:</label>
-          <input type="number" step="0.01" value={valor} onChange={(e) => setValor(e.target.value)} required />
+
+        <div className="form-group">
+          <input
+            type="number"
+            step="0.01"
+            value={valor}
+            onChange={(e) => setValor(e.target.value)}
+            required
+            placeholder="Valor:"
+          />
         </div>
-        <div>
-          <label>Quantidade:</label>
-          <input type="number" value={quantidade} onChange={(e) => setQuantidade(e.target.value)} required />
+
+        <div className="form-group">
+          <input
+            type="number"
+            value={quantidade}
+            onChange={(e) => setQuantidade(e.target.value)}
+            required
+            placeholder="Quantidade:"
+          />
         </div>
-        <div>
-          <label>URL da Imagem:</label>
+
+        <div className="form-group">
           <input
             type="text"
             value={imagem}
             onChange={(e) => setImagem(e.target.value)}
-            placeholder="https://exemplo.com/imagem.jpg"
+            placeholder="URL da Imagem: https://exemplo.com/imagem.jpg"
           />
-          {imagem && <img src={imagem} alt="Pré-visualização" width="100" style={{ display: "block", marginTop: "10px" }} />}
+          {imagem && (
+            <img
+              src={imagem}
+              alt="Pré-visualização"
+              className="imagem-preview"
+              onError={(e) =>
+                (e.currentTarget.src = "https://via.placeholder.com/100")
+              }
+            />
+          )}
         </div>
-        <button type="submit" style={{ background: "#007bff", color: "#fff", padding: "10px", borderRadius: "5px", border: "none", cursor: "pointer", marginTop: "10px" }}>
+
+        <button type="submit" className="btn-cadastrar">
           📥 Cadastrar Produto
         </button>
       </form>

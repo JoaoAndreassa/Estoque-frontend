@@ -1,54 +1,79 @@
-# React + TypeScript + Vite
+# 🖥️ Frontend - Sistema de Controle de Estoque
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este é o **frontend** do sistema de controle de estoque, desenvolvido com **React.js**, **Vite**, e **TypeScript**. Ele fornece uma interface para gerenciar produtos, controlar o estoque e visualizar relatórios de movimentação.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 **Tecnologias Utilizadas**
+- **React.js** + **Vite** - Estrutura do frontend
+- **React Router** - Navegação entre páginas
+- **Axios** - Consumo da API
+- **ApexCharts** - Gráficos e estatísticas
+- **Styled Components / CSS Modules** - Estilização
+- **TypeScript** - Tipagem segura
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 📌 **Como Rodar o Projeto**
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### **1. Clonar o Repositório**
+```sh
+git clone https://github.com/seu-usuario/frontend-estoque.git
+cd frontend
+```
+### **2. Instalar Dependências**
+```sh
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### **3. Iniciar o Servidor**
+```sh
+npm run dev
+```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### **Se tudo estiver correto, a aplicação rodará em:**
+```sh
+http://localhost:5173
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```
+
+## Principais Funcionalidades
+
+```sh
+Login e Registro de Usuários
+Gerenciamento de Produtos (CRUD completo)
+Controle de Estoque (Entrada e Saída de Produtos)
+Dashboard com Relatórios e Gráficos 📊
+Exibição de Imagens de Produtos
+```
+
+##  Prints do Sistema
+Tela de registro de usuario:
+![alt text](<Captura de tela 2025-03-09 003526.png>)
+
+Tela de login:
+![alt text](<Captura de tela 2025-03-09 003512.png>)
+
+Ao fazer login é redirecionado a pagina inicial do sistema:
+![alt text](<Captura de tela 2025-03-09 003539.png>)
+
+Após isso vai cadastrar um produto:
+![alt text](<Captura de tela 2025-03-09 003717.png>)
+
+Após a inclusão do produto no sistema, voltara automaticamente para a pagina inicial:
+![alt text](<Captura de tela 2025-03-09 003728.png>)
+
+Tela de resumo de estoque:
+![alt text](<Captura de tela 2025-03-09 004640.png>)
+
+tela de controle, com entrada e saida com data e hora:
+![alt text](<Captura de tela 2025-03-09 004700.png>)
+
+### **Melhorias Futuras:**
+```sh
+Modo escuro (Dark Mode) 
+PWA para acesso offline 
+Mais estatísticas no dashboard 
+Filtros avançados na listagem de produtos 
+
 ```

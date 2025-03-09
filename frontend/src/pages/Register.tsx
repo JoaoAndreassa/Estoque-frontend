@@ -1,3 +1,4 @@
+import '../styles/resgister.css'
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -29,7 +30,7 @@ const Register = () => {
   const onSubmit = async (data: RegisterFormData) => {
     try {
       await axios.post("http://localhost:3000/api/users/signup", data);
-      navigate("/login"); // Redireciona para login após registro
+      navigate("/login"); 
     } catch (error) {
         console.error("Erro ao registrar:", error);
         setErrorMessage("Erro ao registrar. Verifique os dados e tente novamente.");
@@ -39,29 +40,40 @@ const Register = () => {
   };
 
   return (
-    <div style={{display:"flex", flexDirection:"column", justifyContent:"center", textAlign:"center"}}>
-      <h2>Cadastro</h2>
-      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label>Nome:</label>
-          <input type="text" {...register("name")} />
-          <p style={{ color: "red" }}>{errors.name?.message}</p>
+    <div className="register-container">
+      <h2 className="register-title">Cadastro</h2>
+
+      
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
+
+      <form onSubmit={handleSubmit(onSubmit)} className="register-form">
+        <div className="form-group">
+          <label htmlFor="name">Nome:</label>
+          <input id="name" type="text" {...register("name")} />
+          {errors.name && <p className="error-message">{errors.name.message}</p>}
         </div>
-        <div>
-          <label>Email:</label>
-          <input type="email" {...register("email")} />
-          <p style={{ color: "red" }}>{errors.email?.message}</p>
+
+        <div className="form-group">
+          <label htmlFor="email">Email:</label>
+          <input id="email" type="email" {...register("email")} />
+          {errors.email && <p className="error-message">{errors.email.message}</p>}
         </div>
-        <div>
-          <label>Senha:</label>
-          <input type="password" {...register("password")} />
-          <p style={{ color: "red" }}>{errors.password?.message}</p>
+
+        <div className="form-group">
+          <label htmlFor="password">Senha:</label>
+          <input id="password" type="password" {...register("password")} />
+          {errors.password && (
+            <p className="error-message">{errors.password.message}</p>
+          )}
         </div>
-        <button type="submit">Cadastrar</button>
+
+        <button type="submit" className="register-button">
+          Cadastrar
+        </button>
       </form>
-      <p>
-        Já tem uma conta? <a href="/login">Faça login</a>
+
+      <p className="login-link">
+        Já tem uma conta? <a href="http://localhost:5173/">Faça login</a>
       </p>
     </div>
   );

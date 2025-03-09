@@ -1,0 +1,166 @@
+
+
+.produtos-container {
+  padding: 20px;
+  max-width: 900px;
+  margin: auto;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.titulo-produtos {
+  text-align: center;
+  color: #007bff;
+  margin-bottom: 20px;
+}
+
+.btn-adicionar {
+  background: #28a745;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+  transition: background 0.3s ease;
+}
+
+.btn-adicionar:hover {
+  background: #218838;
+}
+
+
+.tabela-produtos {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+}
+
+.tabela-produtos th,
+.tabela-produtos td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 0.95rem;
+  color: #333;
+}
+.tabela-produtos td.valor-produto{
+  color: #28a745;
+}
+.tabela-produtos th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+}
+
+.tabela-produtos tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+
+.valor-produto {
+  font-weight: 600;
+  color: #28a745;
+}
+
+.imagem-produto {
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  object-fit: cover;
+}
+
+
+
+.acoes-container {
+  position: relative;
+}
+
+
+.acoes-container .btn-acoes {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  transition: background 0.3s ease;
+}
+
+.btn-acoes:hover {
+  background: #007bff7a;
+}
+
+
+.acoes-menu {
+  position: absolute;
+  top: 70%;
+  left: 0;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 5px;
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  z-index: 10; 
+}
+
+
+.acoes-menu button {
+  border: none;
+  background: none;
+  color: #333;
+  text-align: left;
+  padding: 6px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.2s ease;
+}
+
+.acoes-menu button:hover {
+  opacity: .7;
+}
+
+
+.btn-reduce {
+  color: #ff9800; 
+}
+
+.btn-edit {
+  background-color: #007bff;
+}
+
+.btn-delete {
+  color: #dc3545;
+}
+
+.nenhum-produto {
+  text-align: center;
+  padding: 20px;
+}
+
+
+@media (max-width: 600px) {
+  .produtos-container {
+    padding: 10px;
+    margin: 10px;
+  }
+
+  .tabela-produtos {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .btn-acoes {
+    font-size: 0.85rem;
+  }
+}

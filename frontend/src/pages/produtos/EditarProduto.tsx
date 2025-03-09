@@ -1,3 +1,4 @@
+import '../../styles/editarProduto.css'
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -9,18 +10,18 @@ const EditarProduto = () => {
   const [descricao, setDescricao] = useState("");
   const [valor, setValor] = useState("");
   const [quantidade, setQuantidade] = useState("");
-  const [imagem, setImagem] = useState(""); // 🔥 Agora editamos a URL da imagem
+  const [imagem, setImagem] = useState("");
 
   useEffect(() => {
     const fetchProduto = async () => {
       try {
         const response = await axios.get(`http://localhost:3000/api/produtos/${id}`);
         const produto = response.data;
-        setName(produto.name);
-        setDescricao(produto.descricao);
-        setValor(produto.valor.toString());
-        setQuantidade(produto.quantidade.toString());
-        setImagem(produto.imagem || ""); // 🔥 Garante que a URL da imagem seja carregada corretamente
+        setName(produto.name || "");
+        setDescricao(produto.descricao || "");
+        setValor(produto.valor?.toString() || "");
+        setQuantidade(produto.quantidade?.toString() || "");
+        setImagem(produto.imagem || "");
       } catch (error) {
         console.error("Erro ao buscar produto:", error);
       }
@@ -37,95 +38,82 @@ const EditarProduto = () => {
         descricao,
         valor,
         quantidade,
-        imagem, // 🔥 Agora a imagem também pode ser alterada
+        imagem,
       });
 
-      navigate("/dashboard/produtos"); // Redireciona após edição
+      alert("Produto atualizado com sucesso!");
+      navigate("/dashboard/produtos");
     } catch (error) {
       console.error("Erro ao atualizar produto:", error);
+      alert("Erro ao atualizar produto");
     }
   };
-  
+
   return (
-    <div style={{ padding: "0", height:"100%", maxWidth: "500px", marginInline: "auto", background: "#fff", borderRadius: "8px", boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)" }}>
-      <h2 style={{ textAlign: "center", color: "#007bff", marginBottom: "20px" }}>✏️ Editar Produto</h2>
-      <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-        <label style={{ fontWeight: "bold" }}>Nome:</label>
+    <div className="editar-produto-container">
+      <h2 className="editar-produto-title">✏️ Editar Produto</h2>
+
+      <form onSubmit={handleSubmit} className="editar-produto-form">
+        <label>Nome:</label>
         <input
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
-          style={{ padding: "10px", borderRadius: "5px", border: "1px solid #ddd" }}
         />
-  
-        <label style={{ fontWeight: "bold" }}>Descrição:</label>
+
+        <label>Descrição:</label>
         <textarea
           value={descricao}
           onChange={(e) => setDescricao(e.target.value)}
           required
-          style={{ padding: "10px", borderRadius: "5px", border: "1px solid #ddd", height: "80px" }}
         />
-  
-        <label style={{ fontWeight: "bold" }}>Valor:</label>
+
+        <label>Valor:</label>
         <input
           type="number"
           step="0.01"
           value={valor}
           onChange={(e) => setValor(e.target.value)}
           required
-          style={{ padding: "10px", borderRadius: "5px", border: "1px solid #ddd" }}
         />
-  
-        <label style={{ fontWeight: "bold" }}>Quantidade:</label>
+
+        <label>Quantidade:</label>
         <input
           type="number"
           value={quantidade}
           onChange={(e) => setQuantidade(e.target.value)}
           required
-          style={{ padding: "10px", borderRadius: "5px", border: "1px solid #ddd" }}
         />
-  
-        <label style={{ fontWeight: "bold" }}>URL da Imagem:</label>
+
+        <label>URL da Imagem:</label>
         <input
           type="text"
           value={imagem}
           onChange={(e) => setImagem(e.target.value)}
           placeholder="https://exemplo.com/imagem.jpg"
-          style={{ padding: "10px", borderRadius: "5px", border: "1px solid #ddd" }}
         />
-  
+
         {imagem && (
           <img
             src={imagem}
             alt="Pré-visualização"
-            width="100"
-            style={{ display: "block", marginTop: "10px", borderRadius: "5px", border: "1px solid #ddd" }}
+            className="imagem-preview"
+            onError={(e) =>
+              (e.currentTarget.src = "https://via.placeholder.com/100")
+            }
           />
         )}
-  
-        <button
-          type="submit"
-          style={{
-            padding: "12px",
-            marginTop: "15px",
-            background: "#007bff",
-            color: "white",
-            fontWeight: "bold",
-            borderRadius: "5px",
-            border: "none",
-            cursor: "pointer",
-            transition: "all 0.3s ease",
-          }}
-        >
+
+        <button type="submit" className="btn-salvar">
           💾 Salvar Alterações
         </button>
       </form>
     </div>
   );
-  
 };
 
 export default EditarProduto;
+
 
 

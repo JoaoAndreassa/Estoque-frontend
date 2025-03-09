@@ -1,0 +1,93 @@
+
+.editar-produto-container {
+    max-width: 500px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 10px 20px;
+    
+  }
+  
+  .editar-produto-title {
+    text-align: center;
+    color: #007bff;
+    margin-bottom: 20px;
+  }
+  
+  .editar-produto-form {
+    display: flex;
+    flex-direction: column;
+    gap: 7px; 
+  }
+  
+
+  .editar-produto-form label {
+    font-weight: bold;
+  }
+  
+
+  .editar-produto-form input,
+  .editar-produto-form textarea {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+    font-family: inherit;
+  }
+  
+  .editar-produto-form textarea {
+    height: 80px;
+  }
+  
+ 
+  .editar-produto-form input:focus,
+  .editar-produto-form textarea:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  
+
+  .imagem-preview {
+    width: 100px;
+    display: block;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+  }
+  
+
+  .btn-salvar {
+    padding: 12px;
+    margin-top: 15px;
+    background: #007bff;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-salvar:hover {
+    background: #0056b3;
+  }
+  
+
+  @media (max-width: 500px) {
+    .editar-produto-container {
+      margin: 10px;
+      padding: 15px;
+      max-width: 100%;
+    }
+  
+    .btn-salvar {
+      width: 100%;
+      text-align: center;
+    }
+  
+    .imagem-preview {
+      width: 80px;
+    }
+  }
+  

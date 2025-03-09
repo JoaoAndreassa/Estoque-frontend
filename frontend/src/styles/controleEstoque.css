@@ -1,0 +1,63 @@
+
+.controle-estoque-container {
+  max-width: 800px;
+  margin: 20px auto; 
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+
+.controle-estoque-title {
+  text-align: center;
+  color: #007bff;
+  margin-bottom: 20px;
+}
+
+
+.controle-estoque-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.controle-estoque-table th,
+.controle-estoque-table td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  vertical-align: middle;
+  color: black;
+}
+
+.controle-estoque-table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+}
+
+.estoque-entrada {
+  color: green;
+}
+
+.estoque-saida {
+  color: red;
+}
+
+@media (max-width: 600px) {
+  .controle-estoque-container {
+    margin: 10px;
+    padding: 15px;
+  }
+
+  .controle-estoque-table {
+    display: block; 
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+ 
+  .controle-estoque-table th,
+  .controle-estoque-table td {
+    min-width: 100px;
+  }
+}
