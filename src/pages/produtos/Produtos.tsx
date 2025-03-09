@@ -99,10 +99,7 @@ const Produtos = () => {
 			➕ Adicionar Produto
 		  </button>
 	
-		  {/* 
-			Aqui envolvemos a <table> em uma <div> com estilo condicional:
-			Se houver mais de 4 produtos, max-height = 300px e overflow-y = auto.
-		  */}
+		  
 		  <div
 			style={{
 			  maxHeight: produtos.length > 4 ? "300px" : "auto",
