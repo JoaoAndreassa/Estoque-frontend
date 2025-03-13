@@ -30,7 +30,7 @@ const Register = () => {
   const onSubmit = async (data: RegisterFormData) => {
     try {
       await axios.post("http://localhost:3000/api/users/signup", data);
-      navigate("/login"); 
+      navigate("/"); 
     } catch (error) {
         console.error("Erro ao registrar:", error);
         setErrorMessage("Erro ao registrar. Verifique os dados e tente novamente.");
